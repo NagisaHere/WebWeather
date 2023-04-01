@@ -32,7 +32,6 @@ body{
     display: flex;
     align-items: center;
     justify-content: space-between;
-
 }
 
 .search-box input{
@@ -44,9 +43,9 @@ body{
     padding-left: 32px;
 }
 
-.search-bot input::placeholder{
+.search-box input::placeholder{
     font-size: 20px;
-    font-weight: 500px;
+    font-weight: 500;
     color: #06283D;
     text-transform: capitalize;
 }
@@ -111,7 +110,7 @@ body{
     margin-top: 30px;
 }
 
-.weather-details .humidity .weather-details .wind{
+.weather-details .humidity, .weather-details .wind{
     display: flex;
     align-items: center;
     width: 50%;
@@ -120,14 +119,14 @@ body{
 
 .weather-details .humidity{
     padding-left: 20px;
-    justify-content: flex-end;
+    justify-content: flex-start;
 }
 
 .weather-details .wind{
     padding-right: 20px;
     justify-content: flex-end;
 }
-.weather-detailsi{
+.weather-details i{
     color:#06283D;
     font-size: 26px;
     margin-right: 10px;
@@ -171,9 +170,9 @@ body{
     opacity: 0;
 }
 
-.fade-in{
+.fadeIn{
     animation: 0.5s fadeIn forwards;
-    animation-delay: 0.5s
+    animation-delay: 0.5s;
 }
 
 @keyframes fadeIn{

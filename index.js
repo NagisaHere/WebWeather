@@ -9,19 +9,19 @@ search.addEventListener('click', () => {
     const APIkey = '82e08384c2422d0ad03a71e712eff919';
     const city = document.querySelector('.search-box input').value;
 
-    if (city ==='')
-    return;
+    if (city === '')
+        return;
 
-    fetch(`https://api.openweargermap.org/data/2.5/weather?q=${city}&
-    units=metric&appid=${APIkey}`).then(response => response .json()).then
-    (json => {
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${APIkey}`)
+    .then(response => response.json())
+    .then(json => {
         
-        if(json.cmd === '404'){
+        if(json.cod === '404') {
             container.style.height = '400px';
             weatherBox.style.display = 'none';
             weatherDetails.style.display = 'none';
             error404.style.display = 'block';
-            error404.classList.add('fadeIn')
+            error404.classList.add('fadeIn');
             return;
         }
 
@@ -31,19 +31,19 @@ search.addEventListener('click', () => {
         const image = docuemnt.querySelector('.weather-box.img');
         const temperature = document.querySelector('.weather-box .temperature');
         const description = document.querySelector('.weather-box .description');
-        const humidity = document.querySelector('.weather-box .humidity span')
-        const wind = document.querySelector('.weather-box .wind span')
+        const humidity = document.querySelector('.weather-details .humidity span')
+        const wind = document.querySelector('.weather-details .wind span')
 
-        switch (json.weather[0].main){
+        switch (json.weather[0].main) {
             case 'Clear':
                 image.src = 'images/clear.png';
                 break;
             
-            case 'Cloud':
+            case 'Clouds':
                 image.src = 'images/cloud.png';
                 break;
             
-            case 'Mist':
+            case 'Haze':
                 image.src = 'images/mist.png';
                 break;
             
@@ -51,13 +51,27 @@ search.addEventListener('click', () => {
                 image.src = 'images/rain.png';
                 break;
 
-            case 'Clear':
-                image.src = 'images/clear.png';
+            case 'Snow':
+                image.src = 'images/snow.png';
                 break;
 
+            default:
+                image.src = '';
         }
 
-    })
+        temperature.innerHTML = `${parseInt(json.main.temp)}<span>°C</span>`;
+        description.innerHTML = `${json.weather[0].description}`;
+        humidity.innerHTML = `${json.main.humidity}%`;
+        wind.innerHTML = `${parseInt(json.wind.speed)}Km/h`;
+
+        weatherBox.style.display = '';
+        weatherDetails.style.display = '';
+        weatherBox.classList.add('fadeIn');
+        weatherDetails.classList.add('fadeIn');
+        container.style.height = '590px';
+
+
+    });
     
 
-})
+});
